@@ -38,6 +38,6 @@ ws.append(['제목', '내용', '링크'])
 for title, content, link in zip(titles, contents, links):
     ws.append([title, content, link])
 
-wb.save(datetime.datetime.now().strftime('%Y-%m-%d')+'_news.xlsx')
+wb.save(query+"_"+datetime.datetime.now().strftime('%Y-%m-%d')+'_news.xlsx')
 print("생성 완료")
 print("end")
