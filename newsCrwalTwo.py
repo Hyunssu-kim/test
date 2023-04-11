@@ -4,8 +4,11 @@ import openpyxl
 import datetime
 
 # 크롤링할 뉴스 기사의 검색어와 페이지 수를 설정합니다.
-query = '크롤링'
-pages = 3
+print(" * 마지막에 오른쪽 방향키 후 엔터  * 페이지는 숫자 아니면 오류나요~ ")
+print(" 최신 기사 기준 검색어 입니다!")
+print(" 문의 e-mail : foxkim951@naver.com ")
+query = input("단어 입력 : ")
+pages = int(input("페이지 입력 : "))
 
 # 뉴스 기사의 제목, 내용, 링크를 저장할 리스트를 생성합니다.
 titles = []
@@ -14,7 +17,7 @@ links = []
 
 # 검색어와 페이지 수에 해당하는 뉴스 기사를 크롤링합니다.
 for i in range(1, pages + 1):
-    url = f'https://search.naver.com/search.naver?&where=news&query={query}&start={i*10-9}'
+    url = f'https://search.naver.com/search.naver?&where=news&query={query}&start={i*10-9}&sort=1'
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
     news_list = soup.select('.news_area')
@@ -36,3 +39,5 @@ for title, content, link in zip(titles, contents, links):
     ws.append([title, content, link])
 
 wb.save(datetime.datetime.now().strftime('%Y-%m-%d')+'_news.xlsx')
+print("생성 완료")
+print("end")
