@@ -5,7 +5,6 @@ import datetime
 
 # 크롤링할 뉴스 기사의 검색어와 페이지 수를 설정합니다.
 print(" * 마지막에 오른쪽 방향키 후 엔터  * 페이지는 숫자 아니면 오류나요~ ")
-print(" 최신 기사 기준 검색어 입니다!")
 print(" 문의 e-mail : foxkim951@naver.com ")
 while 1 :
     print("!CTRL+C로빠져나오세요!")
@@ -13,6 +12,11 @@ while 1 :
     pages = int(input("페이지 입력 : "))
     print("검색 시 [ 0 : view ] [ 1 : news ] ")
     where = int(input(" 검색 방향 검색 : "))
+    if where:
+        where = 'news'
+    else:
+        where = 'view'
+
     print("검색 시 [ 0 : 관련도 ] [ 1 : 최신순 ] ")
     sort = int(input("옵션 : "))
 
@@ -24,14 +28,18 @@ while 1 :
     # 검색어와 페이지 수에 해당하는 뉴스 기사를 크롤링합니다.
     for i in range(1, pages + 1):
         url = f'https://search.naver.com/search.naver?&where={where}&query={query}&start={i*10-9}&sort={sort}'
+        print(url)
         res = requests.get(url)
         soup = BeautifulSoup(res.text, 'html.parser')
-        news_list = soup.select('.news_area')
-
+        print(soup)
+        news_list = soup.select('.total_area')
+        where = 'total'
+        print('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■')
+        print(news_list)
         for news in news_list:
-            title = news.select_one('.news_tit').text
-            content = news.select_one('.news_dsc').text
-            link = news.select_one('.news_tit')['href']
+            title = news.select_one('.'+where+'_tit').text
+            content = news.select_one('.'+where+'_dsc').text
+            link = news.select_one('.'+where+'_tit')['href']
             titles.append(title)
             contents.append(content)
             links.append(link)

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/instaUp/instaUp.iml" filepath="$PROJECT_DIR$/instaUp/instaUp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openAPi/openAPi.iml" filepath="$PROJECT_DIR$/openAPi/openAPi.iml" />
       <module fileurl="file://$PROJECT_DIR$/test.iml" filepath="$PROJECT_DIR$/test.iml" />
     </modules>
   </component>
